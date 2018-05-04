@@ -1,4 +1,6 @@
 from flask import Flask, url_for, render_template, redirect, request, abort
+from .models import Session, Blog
+import time
 
 
 app = Flask(__name__)
@@ -6,27 +8,15 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
+    session = Session()
     context = {
         'login': url_for("login"),
         'logout': url_for("logout"),
         "comment": url_for("comment", tid=""),
         "new": url_for("new"),
-        'blogs': [
-            {
-                'title': "为自由",
-                "tid": 1,
-                "desc": "活着不就是为了自由么"
-                },
-            {
-                "title": "为生活",
-                "tid": 2,
-                "desc": "活着不就是为了自由么"},
-            {
-                "title": "为梦想",
-                "tid": 3,
-                "desc": "活着不就是为了自由么"}
-            ],
+        'blogs': session.query(Blog)
     }
+    session.close()
     return render_template("index.html", context=context)
 
 
@@ -36,8 +26,15 @@ def new():
         context = {}
         return render_template("new.html", context=context)
     elif request.method == "POST":
-        print(request.form["text"])
-        print(request.form["ptime"])
+        title = request.form["title"]
+        context = request.form["text"]
+        ptime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+        absc = request.form["absc"]
+        session = Session()
+        result = Blog(title=title, absc=absc, ptime=ptime, context=context)
+        session.add(result)
+        session.commit()
+        session.close()
         return "提交成功"
 
 
