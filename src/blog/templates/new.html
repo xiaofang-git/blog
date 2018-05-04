@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{%block body %}
+<div>
+    <h1>添加新博客</h1>
+    <form action="/new" method="post">
+        标题  <textarea name="title" id="" cols="50" rows="1"></textarea>
+        <br>
+        摘要  <textarea name="absc" id="" cols="50" rows="2"></textarea>
+        <br>
+        正文  <textarea name="text" id="" cols="50" rows="10"></textarea>
+        <br>
+        时间  <input type="datetime-local" name="ptime" id="">
+        <br>
+        <br>
+        <input type="submit" value="提交">
+    </form>
+</div>
+{% endblock %}
