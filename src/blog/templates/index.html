@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block body %}
+<div>
+    {% if context.blogs %}
+        <h1>博客首页</h1>
+        <ul>
+            {% for blog in context.blogs %}
+            <li><a href="{{ context.comment }}{{ blog.tid }}"><h3>{{ blog.title }}</h3></a></li>
+            <span><b>{{ blog.desc }}</b></span>
+            <div>
+                    <span><small>点赞数1000</small> </span>
+                    <br>
+                    <span><small>浏览数1000</small></span>
+            </div>
+            {% endfor %}
+        </ul>
+        <!-- {% for blog in blogs %}
+        {{ blog }}
+        <li>
+            <a href="">{{ blog }}</a>
+        </li>
+        {% endfor %} -->
+    {% else %}
+        <li>您还没有添加博客</li>
+    {% endif %}
+
+</div>
+{% endblock %}
