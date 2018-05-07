@@ -20,4 +20,4 @@ db.init_app(app)
 
 app.register_blueprint(blog, url_prefix='/blog')
 
-app.run(debug=True)
+app.run()

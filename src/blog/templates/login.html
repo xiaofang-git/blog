@@ -12,6 +12,10 @@
             <a href="{{ context.register }}">注册</a> -->
             {{ form.email.label }} {{ form.email() }}
             <br>
+            {% for msg in get_flashed_messages()%}
+            {{ msg }}
+            <br>
+            {% endfor %}
             {{ form.passwd.label }} {{ form.passwd }}
             <br>
             {{ form.recaptcha }}
