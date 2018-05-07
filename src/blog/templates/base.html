@@ -13,13 +13,16 @@
   <body>
     <div>
         <button>
-            <a href="{{ context.new }}">添加新博客</a>
+                <a href="{{ url_for('blog.index') }}">回到首页</a>
         </button>
         <button>
-            <a href="{{ context.login }}">登录</a>
+            <a href="{{ url_for('blog.new') }}">添加新博客</a>
         </button>
         <button>
-            <a href="{{ context.logout }}">退出登录</a>
+            <a href="{{ url_for('blog.login') }}">登录</a>
+        </button>
+        <button>
+            <a href="{{ url_for('blog.logout') }}">退出登录</a>
         </button>
     </div>
 

@@ -1,23 +1,26 @@
-from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Integer, Column, String, Text, Time
-from sqlalchemy.orm import sessionmaker
+from flask_sqlalchemy import SQLAlchemy
+# from src.main import app
 
-Base = declarative_base()
-engine = create_engine('mysql+mysqlconnector://root:密码@IP地址/blog', echo=True)
-Session = sessionmaker(bind=engine)
+# from flask import Flask
+# app = Flask("blog")
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:0805@127.0.0.1:3306/blog'
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+db = SQLAlchemy()
 
 
-class Blog(Base):
+class Blog(db.Model):
+
     __tablename__ = "blog"
-    id = Column(Integer(), primary_key=True)
-    title = Column(String(50))
-    absc = Column(String(50))
-    context = Column(String(50))
-    ptime = Column(Time())
+    id = db.Column(db.Integer(), primary_key=True)
+    title = db.Column(db.String(50))
+    absc = db.Column(db.String(50))
+    context = db.Column(db.String(50))
+    ptime = db.Column(db.String(50))
 
 
-# session = Session()
-# b = blog(title="自信", absc="自信的力量")
-# session.add(b)
-# session.commit()
+class User(db.Model):
+    __bind_key__ = 'users'
+    __tablename__ = "user"
+    id = db.Column(db.Integer(), primary_key=True)
+    email = db.Column(db.String(50))
+    passwd = db.Column(db.String(100))
