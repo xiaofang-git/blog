@@ -2,15 +2,18 @@
 {%block body %}
 <div>
     <h1>添加新博客</h1>
-    <form action="/new" method="post">
-        标题  <textarea name="title" id="" cols="50" rows="1"></textarea>
+    <form action="{{ url_for('blog.new')}}" method="post">
+        {{ form.title.label}}
+        {{ form.title() }}
         <br>
-        摘要  <textarea name="absc" id="" cols="50" rows="2"></textarea>
+        {{ form.absc.label}}
+        {{ form.absc() }}
         <br>
-        正文  <textarea name="text" id="" cols="50" rows="10"></textarea>
+        {{ form.context.label}}
+        {{ form.context }}
+        {{ form.csrf_token }}
         <br>
-        <br>
-        <input type="submit" value="提交">
+        {{ form.submit() }}
     </form>
 </div>
 {% endblock %}

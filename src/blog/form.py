@@ -1,6 +1,6 @@
 from flask_wtf import Form, RecaptchaField
 from flask_wtf.html5 import EmailField
-from wtforms import PasswordField, SubmitField
+from wtforms import PasswordField, SubmitField, TextField, TextAreaField
 from wtforms.validators import DataRequired
 from werkzeug.security import check_password_hash
 from .models import User
@@ -27,3 +27,11 @@ class LoginForm(Form):
         
         except Exception as e:
             flash("用户不存在")
+
+
+class TextInput(Form):
+    
+    title = TextField("title", validators=[DataRequired()])
+    absc = TextField("absc", validators=[DataRequired()])
+    context = TextAreaField("context", validators=[DataRequired()])
+    submit = SubmitField("提交")
