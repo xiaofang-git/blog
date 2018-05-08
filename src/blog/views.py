@@ -17,15 +17,6 @@ def comment(blog_id):
     return render_template("comment.html", context=context)
 
 
-@blog.route("/login", methods=["GET", "POST"])
-def login():
-    login_form = LoginForm()
-    if login_form.validate_on_submit():
-        if login_form.checkout_passwd():
-            return "success"
-    return render_template("login.html", context={}, form=login_form)
-
-
 @blog.route("/new", methods=["GET", "POST"])
 def new():
     form = TextInput()
@@ -41,6 +32,3 @@ def new():
     return render_template("new.html", context={}, form=form)
 
 
-@blog.route("/logout")
-def logout():
-    return redirect(url_for("blog.login"))

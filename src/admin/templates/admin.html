@@ -5,12 +5,12 @@
         <h1>博客首页</h1>
         <ul>
             {% for blog in context %}
-            <li><a href="{{ url_for("blog.comment",  blog_id=blog.id) }}"><h3>{{ blog.title }}</h3></a></li>
+            <li><a href="{{ url_for('blog.comment',  blog_id=blog.id) }}"><h3>{{ blog.title }}</h3></a></li>
             <span><b>{{ blog.absc }}</b></span>
             <div>
-                    <span><small>点赞数1000</small> </span>
-                    <br>
-                    <span><small>浏览数1000</small></span>
+                    <span>
+                        <button><a href="{{ url_for('admin.drop', blog_id=blog.id)}}">点击删除</a></button>
+                    </span>
             </div>
             {% endfor %}
         </ul>
