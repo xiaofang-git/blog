@@ -7,7 +7,14 @@ blog = Blueprint('blog', __name__, template_folder="templates", static_folder="s
 
 @blog.route("/")
 def index():
-    return render_template("index.html", context={})
+    context = Blog.query.all()
+    return render_template("index.html", context=context)
+
+
+@blog.route("/<int:blog_id>")
+def comment(blog_id):
+    context = Blog.query.filter_by(id=blog_id).first()
+    return render_template("comment.html", context=context)
 
 
 @blog.route("/login", methods=["GET", "POST"])

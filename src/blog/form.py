@@ -1,13 +1,13 @@
-from flask_wtf import Form, RecaptchaField
+from flask_wtf import FlaskForm
 from flask_wtf.html5 import EmailField
 from wtforms import PasswordField, SubmitField, TextField, TextAreaField
 from wtforms.validators import DataRequired
 from werkzeug.security import check_password_hash
 from .models import User
-from flask import flash, render_template
+from flask import flash
 
 
-class LoginForm(Form):
+class LoginForm(FlaskForm):
     email = EmailField('email', validators=[DataRequired()])
     passwd = PasswordField("passwd", validators=[DataRequired()])
     submit = SubmitField("提交")
@@ -29,7 +29,7 @@ class LoginForm(Form):
             flash("用户不存在")
 
 
-class TextInput(Form):
+class TextInput(FlaskForm):
     
     title = TextField("title", validators=[DataRequired()])
     absc = TextField("absc", validators=[DataRequired()])
