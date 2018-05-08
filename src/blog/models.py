@@ -14,7 +14,7 @@ class Blog(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
     title = db.Column(db.String(50))
     absc = db.Column(db.String(50))
-    context = db.Column(db.String(50))
+    context = db.Column(db.Text())
     ptime = db.Column(db.String(50))
 
 

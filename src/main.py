@@ -1,6 +1,7 @@
 from flask import Flask
 from blog.views import blog
 from blog.models import db
+from admin import views
 
 app = Flask(__name__)
 
@@ -19,5 +20,6 @@ app.config['SQLALCHEMY_BINDS'] = {
 db.init_app(app)
 
 app.register_blueprint(blog, url_prefix='/blog')
+app.register_blueprint(views.admin, url_prefix='/admin')
 
 app.run()
