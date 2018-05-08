@@ -16,10 +16,11 @@ def drop():
         return "参数有误"
 
     blog = Blog.query.get_or_404(blog_id)
-    db.session.delete(blog)
-    db.session.commit()
-    print(blog.title)
-    return "删除成功"
+    if blog:
+        blog = db.session.query(Blog).filter(Blog.id==blog_id).first()
+        db.session.delete(blog)
+        db.session.commit()
+        return "删除成功"
 
 
 @admin.route("/login", methods=["GET", "POST"])
