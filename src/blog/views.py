@@ -1,6 +1,8 @@
 from flask import Blueprint, url_for, render_template, redirect
 from .form import LoginForm, TextInput
 from .models import Blog, db
+from public.login import judge_login
+
 
 blog = Blueprint('blog', __name__, template_folder="templates", static_folder="static")
 
@@ -18,6 +20,7 @@ def comment(blog_id):
 
 
 @blog.route("/new", methods=["GET", "POST"])
+@judge_login
 def new():
     form = TextInput()
     if form.validate_on_submit():

@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from flask_wtf.html5 import EmailField
+from wtforms.fields.html5 import EmailField
 from wtforms import PasswordField, SubmitField, TextField, TextAreaField
 from wtforms.validators import DataRequired
 from werkzeug.security import check_password_hash
