@@ -27,14 +27,19 @@ def drop():
 
 @admin.route("/login", methods=["GET", "POST"])
 def login():
-    if session["login"]:
+
+    if "login" in session and session["login"]:
         return render_template("admin.html", context=Blog.query.all())
     else:
         login_form = LoginForm()
         if login_form.validate_on_submit():
             if login_form.checkout_passwd():
                 session["login"] = True
-                return render_template("admin.html", context=Blog.query.all())
+                original_url = request.cookies.get("original_url")
+                if original_url:
+                    return redirect(original_url)
+                else:
+                    return render_template("admin.html", context=Blog.query.all())
 
         return render_template("login.html", context={}, form=login_form)
 
