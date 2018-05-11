@@ -1,12 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    welcome 
-</body>
-</html>
+{% extends "base.html" %}
+{% block body %}
+<div>
+    <h1>Welcome register</h1>
+    <div>
+        {% from "fields.html" import render_field %}
+        <form action="{{ url_for('admin.register')}}" method="post">
+            <table>
+                {{ render_field( form.email ) }}
+                {{ render_field( form.passwd ) }}
+                {{ render_field( form.confirm ) }}
+            </table>
+            {{ form.csrf_token }}
+            {{ form.submit }}                            
+        </form>
+    </div>
+</div>
+{% endblock %}

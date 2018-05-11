@@ -2,7 +2,7 @@ from . import admin
 from flask import render_template, request, redirect, url_for, session
 from blog.models import Blog
 from flask_sqlalchemy import SQLAlchemy
-from blog.form import LoginForm
+from blog.form import LoginForm, Resigner
 from public.login import judge_login
 
 db = SQLAlchemy()
@@ -50,6 +50,10 @@ def logout():
     return redirect(url_for("admin.login"))
 
 
-@admin.route("/register")
+@admin.route("/register", methods=["GET", "POST"])
 def register():
-    return render_template("register.html")
+    form = Resigner()
+    if form.validate_on_submit():
+        print(form.data)        
+        return("success")
+    return render_template("register.html", form=form)
