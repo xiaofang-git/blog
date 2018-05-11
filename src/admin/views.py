@@ -48,3 +48,8 @@ def login():
 def logout():
     session["login"] = False
     return redirect(url_for("admin.login"))
+
+
+@admin.route("/register")
+def register():
+    return render_template("register.html")
