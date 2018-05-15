@@ -19,8 +19,8 @@ class LoginForm(FlaskForm):
         passwd = self.data.get("passwd")
         try:
             user = User.query.filter_by(email=email).first()
-
             if check_password_hash(user.passwd, passwd):
+                print("mima")
                 return True
             else:
                 return False

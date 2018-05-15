@@ -8,9 +8,9 @@
             <li><a href="{{ url_for("blog.comment",  blog_id=blog.id) }}"><h3>{{ blog.title }}</h3></a></li>
             <span><b>{{ blog.absc }}</b></span>
             <div>
-                    <span><small>点赞数1000</small> </span>
+                    <span><small>标签：{{ blog.tag }}</small> </span>
                     <br>
-                    <span><small>浏览数1000</small></span>
+                    <span><small>作者：{{ blog.email }}</small></span>
             </div>
             {% endfor %}
         </ul>

@@ -1,7 +1,8 @@
-from flask import Blueprint, url_for, render_template, redirect
+from flask import Blueprint, url_for, render_template, redirect, session
 from .form import LoginForm, TextInput
 from .models import Blog, db
 from public.login import judge_login
+import datetime
 
 
 blog = Blueprint('blog', __name__, template_folder="templates", static_folder="static")
@@ -27,7 +28,8 @@ def new():
         title = form.data.get("title")
         absc = form.data.get("absc")
         context = form.data.get("context")
-        blog = Blog(title=title, absc=absc, context=context)
+        tag = "默认"
+        blog = Blog(title=title, absc=absc, context=context, tag=tag, ptime="2017-02-18", user_id=4)
         db.session.add(blog)
         db.session.commit()
         return "seccess"

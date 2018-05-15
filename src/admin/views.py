@@ -36,6 +36,7 @@ def login():
         if login_form.validate_on_submit():
             if login_form.checkout_passwd():
                 session["login"] = True
+                session["user"] = login_form.data.get("email")
                 original_url = request.cookies.get("original_url")
                 if original_url:
                     return redirect(original_url)
