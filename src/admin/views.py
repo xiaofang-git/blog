@@ -1,9 +1,10 @@
 from . import admin
 from flask import render_template, request, redirect, url_for, session
-from blog.models import Blog
+from blog.models import Blog, User, db
 from flask_sqlalchemy import SQLAlchemy
 from blog.form import LoginForm, Resigner
 from public.login import judge_login
+from werkzeug.security import generate_password_hash
 
 db = SQLAlchemy()
 
@@ -54,6 +55,11 @@ def logout():
 def register():
     form = Resigner()
     if form.validate_on_submit():
-        print(form.data)        
-        return("success")
+        email = form.data.get("email")
+        passwd = generate_password_hash(form.data.get("passwd"))
+        print(email, passwd)
+        user = User(email=email, passwd=passwd)
+        db.session.add(user)
+        db.session.commit()
+        return redirect(url_for("admin.login"))
     return render_template("register.html", form=form)
